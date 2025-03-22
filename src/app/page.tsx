@@ -2,6 +2,7 @@
 import Footer from "@/components/Footer";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 
 export default function Home() {
   const sectionRef = useRef(null);
@@ -26,6 +27,37 @@ export default function Home() {
           <span className="rounded-full w-16 h-16 bg-foreground inline-block"></span>
           critic
         </h1>
+      </div>
+
+      {/* hero section */}
+      <div className="w-full min-h-screen flex items-center justify-center bg-foreground text-background">
+        <div className="w-[40%] min-h-[60vh] justify-between flex flex-col items-start gap-4">
+          <h1 className="text-7xl font-bold font-inter">Accelerate Your Processes</h1>
+          <p className="font-roboto-mono text-2xl">AI-Powered <br/>Solutions to<br/> Conquer<br/> Bureaucracy.</p>
+          <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4">Get started for free</button>
+        </div>
+        <div className="flex gap-16">
+          <div className="space-y-8">
+            <Image
+              src="/landing/hero/img2.png"
+              height={1000}
+              width={1000}
+              alt="say good bye's to delays images"
+              className="w-[100%] h-auto"
+            />
+            <p className="w-full h-16 bg-primary text-center text-2xl text-foreground p-4 font-bold">Say Goodbye to Delays</p>
+          </div>
+          <div className="space-y-8">
+            <p className="w-full h-16 bg-primary text-center text-2xl text-foreground p-4 font-bold">Unlock Uprecedented Speed</p>
+            <Image
+              src="/landing/hero/img1.png"
+              height={1000}
+              width={1000}
+              alt="say good bye's to delays images"
+              className="w-[100%] h-auto"
+            />
+          </div>
+        </div>
       </div>
 
       {/* results */}
