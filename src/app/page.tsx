@@ -4,6 +4,7 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
+import ArticleCarousel from "@/components/Article";
 
 export default function Home() {
   const sectionRef = useRef(null);
@@ -193,7 +194,7 @@ export default function Home() {
       </div>
 
       {/* articles */}
-      
+      <ArticleCarousel />
     </div>
   );
 }
