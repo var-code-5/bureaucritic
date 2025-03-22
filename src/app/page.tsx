@@ -5,6 +5,7 @@ import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import Marquee from "react-fast-marquee";
 import ArticleCarousel from "@/components/Article";
+import TeamSection from "@/components/Teams";
 
 export default function Home() {
   const sectionRef = useRef(null);
@@ -184,17 +185,21 @@ export default function Home() {
       </div>
 
       {/* Goal */}
-      <div className="w-full min-h-[200vh] bg-foreground px-12 ">
+      <div className="w-full min-h-[200vh] bg-foreground px-12 flex justify-end">
         <div className="w-[40%] h-full sticky top-0">
           <h1 className="capitalize text-7xl font-bold font-inter text-background pt-46"> Our Goal</h1>
           <p className="text-2xl text-background font-roboto-mono mt-8">Our solution revolutionizes <br/> these key areas.</p>
         </div>
-        <div className="w-[60%] h-full">
+        <div className="w-[60%] h-full mt-24">
+          <Image src="/Goals.svg" alt="Goals" width={1000} height={1000} className="w-full h-auto"/>
         </div>
       </div>
 
       {/* articles */}
       <ArticleCarousel />
+
+      {/* Team section */}
+      <TeamSection />
     </div>
   );
 }

@@ -45,7 +45,7 @@ export default function Footer() {
           Email Id
         </h3>
         <h3 className="absolute -bottom-20 -left-4 w-full text-center text-[10vw] font-bold uppercase text-outline tracking-[43px]">
-          BEAUROCRITIC
+          BUREAUCRATIC
         </h3>
       </div>
     </div>
