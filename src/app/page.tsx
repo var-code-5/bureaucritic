@@ -9,17 +9,17 @@ export default function Home() {
 
   const borderVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 , delay: 0.5 } },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.5 } },
   };
 
   const textVariants = {
     hidden: { opacity: 0, x: -50 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5 , delay: 0.5 } },
+    visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: 0.5 } },
   };
 
   return (
     <div className="w-full h-full">
-      {/* loading screen */}
+      {/* hero section */}
       <div className="w-full min-h-screen flex items-center justify-center">
         <h1 className="text-9xl transition-all duration-75">
           Beaur
@@ -27,9 +27,6 @@ export default function Home() {
           critic
         </h1>
       </div>
-
-      {/* hero section */}
-
 
       {/* results */}
       <div
@@ -55,7 +52,8 @@ export default function Home() {
             <>
               <motion.div
                 key={`border-${index}`}
-                className={`border-2 border-primary min-h-[${item.height}] inline-block`}
+                className="border-2 border-primary inline-block"
+                style={{ minHeight: item.height }}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 variants={borderVariants}
@@ -63,7 +61,8 @@ export default function Home() {
               />
               <motion.div
                 key={`text-${index}`}
-                className={`w-[25%] min-h-[${item.height}] px-4`}
+                className="w-[25%] px-4"
+                style={{ minHeight: item.height }}
                 initial="hidden"
                 animate={isInView ? "visible" : "hidden"}
                 variants={textVariants}
@@ -85,12 +84,6 @@ export default function Home() {
           ))}
         </div>
       </div>
-
-      {/* articles */}
-      {/* <div className="relative w-full min-h-[200vh] bg-foreground">
-        <h1 className="text-2xl text-white">this needs to stay here</h1>
-          
-      </div> */}
     </div>
   );
 }
