@@ -181,6 +181,19 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {/* Goal */}
+      <div className="w-full min-h-[200vh] bg-foreground px-12 ">
+        <div className="w-[40%] h-full sticky top-0">
+          <h1 className="capitalize text-7xl font-bold font-inter text-background pt-46"> Our Goal</h1>
+          <p className="text-2xl text-background font-roboto-mono mt-8">Our solution revolutionizes <br/> these key areas.</p>
+        </div>
+        <div className="w-[60%] h-full">
+        </div>
+      </div>
+
+      {/* articles */}
+      
     </div>
   );
 }
