@@ -1,15 +1,51 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
+import Footer from "@/components/Footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Load Inter font with only normal, italic, and bold styles
+const inter = localFont({
+  src: [
+    {
+      path: "../fonts/Inter/Inter-VariableFont_opsz,wght.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf",
+      weight: "400",
+      style: "italic",
+    },
+    {
+      path: "../fonts/Inter/static/Inter_18pt-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Inter/static/Inter_18pt-Bold.ttf",
+      weight: "900",
+      style: "extrabold",
+    },
+  ],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const robotoMono = localFont({
+  src: [
+    {
+      path: "../fonts/Roboto_Mono/static/RobotoMono-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/Roboto_Mono/static/RobotoMono-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-roboto-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -19,15 +55,12 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={`${inter.variable} ${robotoMono.variable}`}>
+      <body className="font-inter antialiased">
         {children}
+        <Footer />
       </body>
     </html>
   );
