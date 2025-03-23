@@ -6,11 +6,11 @@ import Image from "next/image";
 
 export default function TeamSection() {
   const team = [
-    { name: "John Doe", position: "CEO", image: "/landing/hero/img1.png" },
-    { name: "Jane Doe", position: "CTO", image: "/landing/hero/img2.png" },
-    { name: "John Smith", position: "COO", image: "/landing/hero/img1.png" },
-    { name: "Jane Smith", position: "CFO", image: "/landing/hero/img2.png" },
-    { name: "John Doe", position: "CEO", image: "/landing/hero/img1.png" },
+    { name: "Sidhant Srivastava", position: "AI/ML Dev", image: "/team/sid.jpg" },
+    { name: "Jothish Kamal", position: "Backend Dev", image: "/team/jotish.jpg" },
+    { name: "Samridh Suresh", position: "UI/UX Designer", image: "/team/samridh.jpg" },
+    { name: "Sarvesh Dakhore", position: "Backend Dev", image: "/team/sarvesh.jpg" },
+    { name: "Varshith Reddy", position: "Frontend Dev", image: "/team/Varshith.jpg" },
   ];
 
   const [index, setIndex] = useState(0);

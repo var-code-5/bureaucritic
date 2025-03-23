@@ -172,6 +172,9 @@ function Chat() {
           ...prevMessages,
           { text: "Form submitted successfully!", sender: "bot" },
         ]);
+        
+        // Close the modal after successful submission
+        closeModal();
       } else {
         console.error("Failed to submit form:", response.statusText);
         setMessages((prevMessages) => [
@@ -186,11 +189,7 @@ function Chat() {
         { text: "Error submitting the form. Please try again later.", sender: "bot" },
       ]);
     }
-
-    // Close modal and clear form logic is already handled in the closeModal function.
   };
-
-  // Close modal and clear form logic is already handled in the closeModal function.
 
   const closeModal = () => {
     setIsModalOpen(false);
