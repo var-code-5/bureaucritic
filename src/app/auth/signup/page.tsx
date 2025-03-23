@@ -40,7 +40,8 @@ export default function SignUp() {
     if (isValid) {
       console.log({ name, email, password, accountType, organisation, website });
       // Submit form data to server here
-      alert("Form submitted successfully!");
+      // alert("Form submitted successfully!");
+      window.location.href = "/dashboard/metrics";
     }
   };
   

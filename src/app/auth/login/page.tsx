@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link';
 import React, { useState } from 'react';
 
 export default function Login() {
@@ -64,12 +65,12 @@ export default function Login() {
           {passwordError && (
             <span className="text-background text-sm">{passwordError}</span>
           )}
-          <button
+          <Link href="/dashboard/metrics" className='w-full h-full flex flex-row justify-end'><button
             type="submit"
             className="bg-foreground text-primary border-2 border-primary w-1/3 h-12 mx-auto text-2xl font-bold font-inter cursor-pointer"
           >
             Begin
-          </button>
+          </button></Link>
         </form>
       </div>
     </div>

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Marquee from "react-fast-marquee";
 import ArticleCarousel from "@/components/Article";
 import TeamSection from "@/components/Teams";
+import Link from "next/link";
 
 export default function Home() {
   const sectionRef = useRef(null);
@@ -79,7 +80,7 @@ export default function Home() {
       </AnimatePresence>
 
       {/* hero section */}
-      <div className="relative w-full min-h-screen flex items-center justify-center bg-foreground text-background -z-10">
+      <div className="relative w-full min-h-screen flex items-center justify-center bg-foreground text-background">
         <div className="w-[40%] min-h-[60vh] justify-between flex flex-col items-start gap-4">
           <h1 className="text-7xl font-bold font-inter">
             Accelerate Your Processes
@@ -90,9 +91,11 @@ export default function Home() {
             <br /> Conquer
             <br /> Bureaucracy.
           </p>
-          <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4 ">
-            Get started for free
-          </button>
+          <Link href="/auth" className="w-full">
+            <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4 cursor-pointer">
+              Get started for free
+            </button>
+          </Link>
         </div>
         <div className="flex gap-16">
           <div className="space-y-8">
@@ -109,7 +112,7 @@ export default function Home() {
           </div>
           <div className="space-y-8">
             <p className="w-full h-16 bg-primary text-center text-2xl text-foreground p-4 font-bold font-roboto-mono">
-              Unlock Uprecedented Speed
+              Unlock Unprecedented Speed
             </p>
             <Image
               src="/landing/hero/img1.png"
@@ -122,7 +125,9 @@ export default function Home() {
         </div>
         <div className="absolute bottom-0 w-full left-0 border-y-2 border-primary">
           <Marquee autoFill={true} speed={70}>
-            <div className="text-4xl font-bold pl-6 py-4 bg-foreground text-primary">Bypass the Red Tape: AI Streamlines Your Forms and Applications</div>
+            <div className="text-4xl font-bold pl-6 py-4 bg-foreground text-primary">
+              Bypass the Red Tape: AI Streamlines Your Forms and Applications
+            </div>
           </Marquee>
         </div>
       </div>
@@ -130,12 +135,27 @@ export default function Home() {
       {/* solutions */}
       <div className="w-full min-h-screen flex text-background bg-foreground px-12 py-8">
         <div className="min-w-[30%] min-h-full flex flex-col justify-between py-28 text-left">
-          <h1 className="text-7xl font-bold font-inter text-primary">The Solution you need</h1>
-          <p className="font-roboto-mono text-2xl">Our Solution <br/>Removes <br/>Bureaucratic<br/> Burdens</p>
-          <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4">Book a free demo</button>
+          <h1 className="text-7xl font-bold font-inter text-primary">
+            The Solution you need
+          </h1>
+          <p className="font-roboto-mono text-2xl">
+            Our Solution <br />
+            Removes <br />
+            Bureaucratic
+            <br /> Burdens
+          </p>
+          <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4">
+            Book a free demo
+          </button>
         </div>
         <div className="min-w-[70%] min-h-full flex flex-col justify-center">
-          <Image src="/landing/Flow-b.svg" alt="Flow" width={1000} height={1000} className="w-full h-auto"/>
+          <Image
+            src="/landing/Flow-b.svg"
+            alt="Flow"
+            width={1000}
+            height={1000}
+            className="w-full h-auto"
+          />
         </div>
       </div>
 
@@ -196,7 +216,9 @@ export default function Home() {
         </div>
         <div className="absolute bottom-0 w-full left-0 border-y-2 border-primary">
           <Marquee autoFill={true} speed={70}>
-            <div className="text-4xl font-bold pl-6 py-4 bg-foreground text-primary">Bypass the Red Tape: AI Streamlines Your Forms and Applications</div>
+            <div className="text-4xl font-bold pl-6 py-4 bg-foreground text-primary">
+              Bypass the Red Tape: AI Streamlines Your Forms and Applications
+            </div>
           </Marquee>
         </div>
       </div>
@@ -204,11 +226,22 @@ export default function Home() {
       {/* Goal */}
       <div className="w-full min-h-[200vh] bg-foreground px-12 flex justify-end">
         <div className="w-[40%] h-full sticky top-0">
-          <h1 className="capitalize text-7xl font-bold font-inter text-background pt-46"> Our Goal</h1>
-          <p className="text-2xl text-background font-roboto-mono mt-8">Our solution revolutionizes <br/> these key areas.</p>
+          <h1 className="capitalize text-7xl font-bold font-inter text-background pt-46">
+            {" "}
+            Our Goal
+          </h1>
+          <p className="text-2xl text-background font-roboto-mono mt-8">
+            Our solution revolutionizes <br /> these key areas.
+          </p>
         </div>
         <div className="w-[60%] h-full mt-24">
-          <Image src="/Goals.svg" alt="Goals" width={1000} height={1000} className="w-full h-auto"/>
+          <Image
+            src="/Goals.svg"
+            alt="Goals"
+            width={1000}
+            height={1000}
+            className="w-full h-auto"
+          />
         </div>
       </div>
 
