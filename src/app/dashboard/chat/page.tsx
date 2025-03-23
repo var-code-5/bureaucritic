@@ -1,6 +1,19 @@
 'use client';
 import React, { useState, useRef, useEffect } from "react";
 import { Send } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 // Define TypeScript interfaces for better type safety
 interface FormField {
@@ -34,6 +47,7 @@ function Chat() {
   const [formValues, setFormValues] = useState<FormField>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -41,7 +55,13 @@ function Chat() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, formData]);
+  }, [messages]);
+
+  useEffect(() => {
+    if (formData) {
+      setIsModalOpen(true);
+    }
+  }, [formData]);
 
   const handleSend = async () => {
     if (input.trim() === "" || isLoading) return;
@@ -70,33 +90,6 @@ function Chat() {
       });
 
       if (response.ok) {
-        // For development, uncomment the next line to test with dummy data
-        // const data: ApiResponse = {
-        //   "generation": "Here is the application form XIV:\n\n\"In accordance with section 45 of the Copyright Act, 1957 (14 of 1957), I hereby apply for registration of copyright and request that entries may be made in the Register of Copyrights.\"\n\nPlease note that this is a generic template and you may need to provide additional information and details as required by the specific application process.",
-        //   "form_struct": {
-        //     "formId": 1,
-        //     "formTitle": "FORM XIV - APPLICATION FOR REGISTRATION OF COPYRIGHT [SEE RULE 70]",
-        //     "formDescription": "\n    FORM XIV - APPLICATION FOR REGISTRATION OF COPYRIGHT\n    For applying to the Registrar of Copyrights, Copyright Office, New Delhi\n    for registration of copyright in accordance with section 45 of the Copyright Act, 1957 (14 of 1957).\n  ",
-        //     "name": "Admin",
-        //     "address": "",
-        //     "nationality": "",
-        //     "category": "",
-        //     "work_title": "",
-        //     "work_description": "",
-        //     "work_class": "",
-        //     "work_language": "",
-        //     "author_name": "",
-        //     "author_address": "",
-        //     "publication_status": "",
-        //     "publisher_details": "",
-        //     "publication_year": "",
-        //     "fee_payment_details": "",
-        //     "declaration": "",
-        //     "work_sample": ""
-        //   },
-        //   "user_id": 1
-        // };
-        
         const data: ApiResponse = await response.json();
         console.log(data);
         
@@ -141,21 +134,66 @@ function Chat() {
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>, field: string) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, 
+    field: string
+  ) => {
     setFormValues((prev) => ({ ...prev, [field]: e.target.value }));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submitted Form Data:", formValues);
-    
-    // Add submission confirmation message
-    setMessages((prevMessages) => [
-      ...prevMessages,
-      { text: "Form submitted successfully!", sender: "bot" },
-    ]);
-    
-    // Clear form after submission
+
+    try {
+      // Use environment variable for the API endpoint and token
+      const apiEndpoint = process.env.NEXT_PUBLIC_API_ENDPOINT || 
+        "https://57a3-2401-4900-60d7-93d7-e1cb-944d-4a73-713e.ngrok-free.app/ml/submit-form-ai";
+      const apiToken = process.env.NEXT_PUBLIC_API_TOKEN || "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImRtdG9zYXJ2ZXNoQGdtYWlsLmNvbSIsImlkIjoxLCJicm93c2VyIjoiUG9zdG1hblJ1bnRpbWUvNy40My4wIiwidmVyc2lvbiI6MywiaWF0IjoxNzQyNzI5MzQ3LCJleHAiOjE3NDI5ODg1NDd9.N6KpKRcFj2Z11gjliuqNlKeW5MifUe1Ln9sFzk4n2v8";
+
+      const response = await fetch(apiEndpoint, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiToken}`,
+        },
+        body: JSON.stringify({
+          form_struct: { ...formData, ...formValues },
+          user_id: 1
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log("Form submission response:", data);
+
+        // Add submission confirmation message
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: "Form submitted successfully!", sender: "bot" },
+        ]);
+      } else {
+        console.error("Failed to submit form:", response.statusText);
+        setMessages((prevMessages) => [
+          ...prevMessages,
+          { text: "Failed to submit the form. Please try again.", sender: "bot" },
+        ]);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setMessages((prevMessages) => [
+        ...prevMessages,
+        { text: "Error submitting the form. Please try again later.", sender: "bot" },
+      ]);
+    }
+
+    // Close modal and clear form logic is already handled in the closeModal function.
+  };
+
+  // Close modal and clear form logic is already handled in the closeModal function.
+
+  const closeModal = () => {
+    setIsModalOpen(false);
     setFormData(null);
     setFormValues({});
   };
@@ -190,7 +228,7 @@ function Chat() {
               key={index}
               className={`max-w-[60%] px-4 py-2 my-2 ${
                 msg.sender === "user"
-                  ? "bg-primary text-background self-end text-right rounded-lg rounded-tr-none" 
+                  ? "bg-primary text-foreground self-end text-right rounded-lg rounded-tr-none" 
                   : "bg-background text-foreground self-start text-left rounded-lg rounded-tl-none"
               }`}
             >
@@ -204,59 +242,6 @@ function Chat() {
           )}
           <div ref={messagesEndRef} />
         </div>
-
-        {/* Render Form if Available */}
-        {formData && (
-          <div className="p-4 border-t-2 border-background bg-white text-black">
-            <h2 className="text-2xl font-bold">{formData.formTitle || "Form"}</h2>
-            <p className="text-sm text-gray-500 whitespace-pre-line">{formData.formDescription || "Please fill out this form"}</p>
-            <form onSubmit={handleFormSubmit} className="mt-4 space-y-4">
-              {Object.entries(formData)
-                .filter(([key]) => !["formId", "formTitle", "formDescription"].includes(key))
-                .map(([key, value]) => (
-                  <div key={key} className="flex flex-col">
-                    <label htmlFor={key} className="font-semibold capitalize">{key.replace(/_/g, " ")}</label>
-                    {key === "work_description" || key === "declaration" ? (
-                      <textarea
-                        id={key}
-                        value={formValues[key] || ""}
-                        onChange={(e) => setFormValues(prev => ({ ...prev, [key]: e.target.value }))}
-                        placeholder={typeof value === 'string' ? value : ""}
-                        className="border-2 border-gray-300 rounded-md p-2 min-h-24"
-                      />
-                    ) : (
-                      <input
-                        type="text"
-                        id={key}
-                        value={formValues[key] || ""}
-                        onChange={(e) => handleInputChange(e, key)}
-                        placeholder={typeof value === 'string' ? value : ""}
-                        className="border-2 border-gray-300 rounded-md p-2"
-                      />
-                    )}
-                  </div>
-                ))}
-              <div className="flex justify-between">
-                <button
-                  type="submit"
-                  className="bg-primary text-white px-4 py-2 rounded-md hover:opacity-90"
-                >
-                  Submit
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFormData(null);
-                    setFormValues({});
-                  }}
-                  className="bg-gray-300 text-black px-4 py-2 rounded-md hover:bg-gray-400"
-                >
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
-        )}
 
         {/* Input Field */}
         <div className="p-4 flex items-center relative w-full">
@@ -279,6 +264,60 @@ function Chat() {
           </button>
         </div>
       </div>
+
+      {/* Form Modal */}
+      <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+        <DialogContent className="sm:max-w-md md:max-w-2xl lg:max-w-4xl font-inter">
+          <DialogHeader>
+            <DialogTitle className="text-4xl">{formData?.formTitle || "Form"}</DialogTitle>
+            <DialogDescription className="whitespace-pre-line">
+              {formData?.formDescription || "Please fill out this form"}
+            </DialogDescription>
+          </DialogHeader>
+          
+          <ScrollArea className="max-h-[60vh] pr-4">
+            <form onSubmit={handleFormSubmit} className="space-y-4 py-4">
+              {formData && 
+                Object.entries(formData)
+                  .filter(([key]) => !["formId", "formTitle", "formDescription"].includes(key))
+                  .map(([key, value]) => (
+                    <div key={key} className="grid gap-2">
+                      <Label htmlFor={key} className="font-semibold capitalize">
+                        {key.replace(/_/g, " ")}
+                      </Label>
+                      {key === "work_description" || key === "declaration" ? (
+                        <Textarea
+                          id={key}
+                          value={formValues[key] || ""}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleInputChange(e, key)}
+                          placeholder={typeof value === 'string' ? value : ""}
+                          className="min-h-24"
+                        />
+                      ) : (
+                        <Input
+                          type="text"
+                          id={key}
+                          value={formValues[key] || ""}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => handleInputChange(e, key)}
+                          placeholder={typeof value === 'string' ? value : ""}
+                        />
+                      )}
+                    </div>
+                  ))
+              }
+            </form>
+          </ScrollArea>
+          
+          <DialogFooter className="sm:justify-between">
+            <Button variant="destructive" type="button" onClick={closeModal} className="bg-foreground">
+              Cancel
+            </Button>
+            <Button type="submit" onClick={handleFormSubmit}>
+              Submit
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
