@@ -19,10 +19,6 @@ export default function TeamSection() {
     setIndex((prev) => (prev + 1) % team.length);
   };
 
-  const prevSlide = () => {
-    setIndex((prev) => (prev - 1 + team.length) % team.length);
-  };
-
   // Auto-play every 3 seconds
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000);

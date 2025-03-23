@@ -3,12 +3,6 @@
 import React from 'react'
 import { Pie, PieChart as RechartsPieChart } from 'recharts'
 import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,

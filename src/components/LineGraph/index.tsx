@@ -1,15 +1,10 @@
 "use client"
 
 import React from 'react'
-import { TrendingUp } from "lucide-react"
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts"
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
 } from "@/components/ui/card"
 import {
   ChartConfig,
@@ -57,13 +52,6 @@ const FormLineGraph: React.FC<FormLineGraphProps> = ({ data = [] }) => {
       color: "hsl(var(--muted-foreground))",
     },
   } satisfies ChartConfig
-
-  // Calculate total applications for display
-  const totalApplications = data.reduce((sum, form) => sum + form.total, 0)
-  
-  // Calculate trend percentage
-  const totalApproved = data.reduce((sum, form) => sum + form.approved, 0)
-  const approvalRate = data.length > 0 ? Math.round((totalApproved / totalApplications) * 100) : 0
 
   return (
     <Card className="w-full border-0">

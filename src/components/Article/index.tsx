@@ -63,7 +63,7 @@ const ArticleCarousel: React.FC = () => {
   useEffect(() => {
     const interval = setInterval(rotateClockwise, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, );
 
   return (
     <div className="relative w-full h-screen bg-foreground text-background font-inter overflow-hidden px-12 -z-10">

@@ -94,9 +94,6 @@ export default function SignUp() {
     }
   };
   
-  // Determine if we should show organization and website steps based on account type
-  const totalSteps = accountType === "admin" ? 5 : 3;
-  
   // Get the actual step number for display
   const getDisplayStep = () => {
     if (accountType === "admin") {
@@ -106,11 +103,6 @@ export default function SignUp() {
     } else {
       return currentStep + 1;
     }
-  };
-  
-  // Skip organization and website steps if the user is not an admin
-  const shouldSkipStep = (step: number) => {
-    return accountType === "user" && (step === 2 || step === 3);
   };
   
   // Adjust next button text based on current step
@@ -123,7 +115,7 @@ export default function SignUp() {
       {/* Step 1: Name */}
       <div className={`min-w-[40%] min-h-[60%] flex flex-col gap-20 ${currentStep === 0 ? "block" : "hidden"}`}>
         <h1 className="text-5xl text-center font-bold">
-          Welcome! What's Your Name?
+          Welcome! What&apos;s Your Name?
         </h1>
         <input
           className="bg-background text-foreground w-full h-12 px-4"
