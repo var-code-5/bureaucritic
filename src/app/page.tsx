@@ -92,7 +92,7 @@ export default function Home() {
             <br /> Bureaucracy.
           </p>
           <Link href="/auth" className="w-full">
-            <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4 cursor-pointer">
+            <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4 cursor-pointer hover:bg-primary hover:text-foreground">
               Get started for free
             </button>
           </Link>
