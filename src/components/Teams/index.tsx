@@ -68,18 +68,18 @@ export default function TeamSection() {
         </div>
 
         {/* Navigation Buttons */}
-        <div className="flex gap-4">
+        {/* <div className="flex gap-4">
           <button onClick={prevSlide} className="p-2 text-3xl rounded-full">⬅</button>
           <button onClick={nextSlide} className="p-2 text-3xl rounded-full">➡</button>
-        </div>
+        </div> */}
       </div>
 
       {/* Right Section - Name & Position */}
-      <div className="w-[30%] min-h-screen flex flex-col justify-end">
+      <div className="w-[30%] min-h-screen flex flex-col justify-end pb-16">
         <p className="text-2xl font-roboto-mono text-right">{team[index].position}</p>
-        <h1 className="text-7xl font-inter font-bold py-16 text-right">
+        <h1 className="text-7xl font-inter font-bold py-16 mt-16 text-right">
           {team[index].name.split(" ")[0]}
-          <br />
+          <br/>
           {team[index].name.split(" ")[1]}
         </h1>
       </div>

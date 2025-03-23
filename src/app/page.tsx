@@ -90,7 +90,7 @@ export default function Home() {
             <br /> Conquer
             <br /> Bureaucracy.
           </p>
-          <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4">
+          <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4 ">
             Get started for free
           </button>
         </div>
@@ -103,12 +103,12 @@ export default function Home() {
               alt="say good bye's to delays images"
               className="w-[100%] h-auto"
             />
-            <p className="w-full h-16 bg-primary text-center text-2xl text-foreground p-4 font-bold">
+            <p className="w-full h-16 bg-primary text-center text-2xl text-foreground p-4 font-bold font-roboto-mono">
               Say Goodbye to Delays
             </p>
           </div>
           <div className="space-y-8">
-            <p className="w-full h-16 bg-primary text-center text-2xl text-foreground p-4 font-bold">
+            <p className="w-full h-16 bg-primary text-center text-2xl text-foreground p-4 font-bold font-roboto-mono">
               Unlock Uprecedented Speed
             </p>
             <Image
@@ -120,17 +120,29 @@ export default function Home() {
             />
           </div>
         </div>
-        <div className="absolute bottom-0 w-full left-0">
+        <div className="absolute bottom-0 w-full left-0 border-y-2 border-primary">
           <Marquee autoFill={true} speed={70}>
-            <div className="text-4xl font-bold pl-6 py-4 bg-primary text-foreground">Bypass the Red Tape: AI Streamlines Your Forms and Applications</div>
+            <div className="text-4xl font-bold pl-6 py-4 bg-foreground text-primary">Bypass the Red Tape: AI Streamlines Your Forms and Applications</div>
           </Marquee>
+        </div>
+      </div>
+
+      {/* solutions */}
+      <div className="w-full min-h-screen flex text-background bg-foreground px-12 py-8">
+        <div className="min-w-[30%] min-h-full flex flex-col justify-between py-28 text-left">
+          <h1 className="text-7xl font-bold font-inter text-primary">The Solution you need</h1>
+          <p className="font-roboto-mono text-2xl">Our Solution <br/>Removes <br/>Bureaucratic<br/> Burdens</p>
+          <button className="w-[80%] border-2 border-background text-4xl font-bold py-2 px-4">Book a free demo</button>
+        </div>
+        <div className="min-w-[70%] min-h-full flex flex-col justify-center">
+          <Image src="/landing/Flow-b.svg" alt="Flow" width={1000} height={1000} className="w-full h-auto"/>
         </div>
       </div>
 
       {/* results */}
       <div
         ref={sectionRef}
-        className="w-full min-h-screen flex text-background bg-foreground px-12 py-4"
+        className="w-full min-h-screen flex text-background bg-foreground px-12 py-4 relative"
       >
         <div className="min-w-1/2 min-h-full flex flex-col justify-center">
           <h1 className="capitalize text-7xl font-bold">
@@ -145,8 +157,8 @@ export default function Home() {
         <div className="w-1/2 min-h-full flex justify-start items-end">
           {[
             { value: 10, height: "30%" },
-            { value: 15, height: "40%" },
-            { value: 20, height: "50%" },
+            { value: 15, height: "50%" },
+            { value: 20, height: "70%" },
           ].map((item, index) => (
             <>
               <motion.div
@@ -182,6 +194,11 @@ export default function Home() {
             </>
           ))}
         </div>
+        <div className="absolute bottom-0 w-full left-0 border-y-2 border-primary">
+          <Marquee autoFill={true} speed={70}>
+            <div className="text-4xl font-bold pl-6 py-4 bg-foreground text-primary">Bypass the Red Tape: AI Streamlines Your Forms and Applications</div>
+          </Marquee>
+        </div>
       </div>
 
       {/* Goal */}
@@ -200,6 +217,8 @@ export default function Home() {
 
       {/* Team section */}
       <TeamSection />
+
+      <Footer />
     </div>
   );
 }

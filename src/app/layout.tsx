@@ -62,7 +62,6 @@ export default function RootLayout({
       <body className="font-inter antialiased">
         <Navbar />
         {children}
-        <Footer />
       </body>
     </html>
   );

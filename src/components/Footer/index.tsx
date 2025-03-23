@@ -9,7 +9,7 @@ export default function Footer() {
           Empower Action
         </h1>
         <Image
-          src="/landing/footer/Arrow 1.svg"
+          src="/landing/footer/Arrow 1.png"
           alt="Arrow here"
           height={1000}
           width={1000}
@@ -44,7 +44,7 @@ export default function Footer() {
         <h3 className="font-roboto-mono text-3xl border-b-2 border-foreground inline-block w-[25%]">
           Email Id
         </h3>
-        <h3 className="absolute -bottom-20 -left-4 w-full text-center text-[10vw] font-bold uppercase text-outline tracking-[43px]">
+        <h3 className="absolute -bottom-28 -left-8 w-full text-center text-[13vw] font-bold uppercase text-outline ">
           BUREAUCRATIC
         </h3>
       </div>
