@@ -40,7 +40,7 @@ export default function Profile() {
 
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [saveStatus, setSaveStatus] = useState(null); // null, 'success', 'error'
+  const [saveStatus, setSaveStatus] = useState<'success' | 'error' | null>(null); // null, 'success', 'error'
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -67,7 +67,7 @@ export default function Profile() {
       setUserData({
         ...userData,
         [parent]: {
-          ...userData[parent],
+          ...(userData[parent as keyof typeof userData] as Record<string, any>),
           [child]: value
         }
       });
